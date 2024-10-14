@@ -1,25 +1,27 @@
-#include "Graph.h"
-#include "Algorithm.h"
+//
+// Created by matty on 14.10.2024.
+//
+#include <iostream>
 #include "FileController.h"
+#include "Bruteforce.h"
 
 int main() {
-    // Tworzymy obiekt FileController
-    FileController fileController;
+    try {
+        Graph graph = FileController::readDataFromFile("data.txt");
 
-    // Wczytujemy graf z pliku "graph.txt"
-    Graph g = fileController.loadGraphFromFile("data.txt");
+        std::cout << "Macierz sąsiedztwa:" << std::endl;
+        graph.display();
 
-    // Wyświetlamy macierz sąsiedztwa
-    g.display();
+        // Tworzymy obiekt Bruteforce i rozwiązujemy problem TSP
+        Bruteforce bruteForceSolver(graph);
+        int minCost = bruteForceSolver.solve();
 
-//    // Tworzymy obiekt algorytmu i przekazujemy graf
-//    Algorithm alg(g);
-//
-//    // Wywołujemy funkcję brute-force TSP z miastem startowym 0
-//    int result = alg.tspBruteForce(0);
-//
-//    // Wyświetlamy wynik
-//    std::cout << "Minimalny koszt trasy: " << result << std::endl;
+        std::cout << "Minimalny koszt trasy: " << minCost << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
 
     return 0;
 }

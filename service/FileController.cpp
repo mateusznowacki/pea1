@@ -1,40 +1,37 @@
 #include "FileController.h"
 #include <fstream>
-#include <iostream>
+#include <sstream>
 #include <stdexcept>
 
-// Funkcja do wczytywania grafu z pliku tekstowego
-Graph FileController::loadGraphFromFile(const std::string& filename) {
-    std::ifstream file(filename);  // Otwieramy plik do odczytu
+Graph FileController::readDataFromFile(const std::string& fileName) {
+    std::ifstream file(fileName);
+
     if (!file.is_open()) {
-        throw std::runtime_error("Nie można otworzyć pliku: " + filename);
+        throw std::runtime_error("Nie udalo sie otworzyc pliku.");
     }
 
-    int V;
-    file >> V;  // Czytamy rozmiar macierzy (liczba wierzchołków)
+    std::string line;
+    int vertices;
 
-    if (file.fail()) {
-        throw std::runtime_error("Błąd podczas wczytywania rozmiaru grafu.");
+    if (std::getline(file, line)) {
+        std::istringstream iss(line);
+        iss >> vertices;
     }
 
-    // Tworzymy graf o rozmiarze VxV
-    Graph graph(V);
+    Graph graph(vertices);
 
-    // Wczytujemy macierz sąsiedztwa
-    for (int i = 0; i < V; ++i) {
-        for (int j = 0; j < V; ++j) {
-            int weight;
-            file >> weight;  // Czytamy wagę krawędzi
+    int i = 0;
+    while (std::getline(file, line) && i < vertices) {
+        std::istringstream iss(line);
+        int j = 0, weight;
 
-            if (file.fail()) {
-                throw std::runtime_error("Błąd podczas wczytywania wagi krawędzi.");
-            }
-
-            // Dodajemy wszystkie krawędzie, nawet te z wagą -1
-            graph.addEdge(i, j, weight);
+        while (iss >> weight && j < vertices) {
+            graph.setEdge(i, j, weight);
+            ++j;
         }
+        ++i;
     }
 
-    file.close();  // Zamykamy plik
+    file.close();
     return graph;
 }

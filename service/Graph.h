@@ -1,28 +1,31 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+
+#ifndef PEA11_GRAPH_H
+#define PEA11_GRAPH_H
+
+
 
 #include <vector>
 #include <iostream>
 
 class Graph {
 private:
-    std::vector<std::vector<int>> adjMatrix;  // Macierz sąsiedztwa
-    int V;  // Liczba wierzchołków
+    int vertices;  // Liczba wierzchołków
+    std::vector<std::vector<int>> adjacencyMatrix;  // Macierz sąsiedztwa
 
 public:
-    // Konstruktor przyjmujący liczbę wierzchołków
-    Graph(int V);
+    // Konstruktor inicjujący liczbę wierzchołków i tworzący pustą macierz sąsiedztwa
+    Graph(int vertices);
 
-    // Funkcja do dodawania krawędzi (odległości) między wierzchołkami
-    void addEdge(int u, int v, int weight);
+    // Ustawianie wagi krawędzi między wierzchołkami
+    void setEdge(int i, int j, int weight);
 
-    // Funkcja zwracająca odległość między dwoma wierzchołkami
-    int getEdgeWeight(int u, int v) const;
+    // Pobranie wagi krawędzi między wierzchołkami
+    int getEdge(int i, int j) const;
 
-    // Funkcja zwracająca liczbę wierzchołków
-    int getVerticesCount() const;
+    // Pobranie liczby wierzchołków
+    int getVertices() const;
 
-    // Funkcja do wyświetlania macierzy sąsiedztwa
+    // Funkcja pomocnicza do wyświetlania grafu
     void display() const;
 };
 

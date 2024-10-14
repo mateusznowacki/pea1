@@ -6,8 +6,8 @@
 
 class FileController {
 public:
-    // Funkcja do wczytywania grafu z pliku tekstowego
-    Graph loadGraphFromFile(const std::string& filename);
+    // Funkcja do odczytu danych z pliku i zwrócenia obiektu Graph
+    static Graph readDataFromFile(const std::string& fileName);
 };
 
 #endif // FILECONTROLLER_H

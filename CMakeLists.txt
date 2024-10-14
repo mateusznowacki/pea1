@@ -15,7 +15,9 @@ add_executable(pea11 service/main.cpp
         service/FileController.cpp
         service/Graph.cpp
         service/Graph.h
-        service/Algorithm.cpp
-        service/Algorithm.h
         service/Filecontroller.h
+        service/Bruteforce.cpp
+        service/Bruteforce.h
+
+
 )
