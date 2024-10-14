@@ -1,0 +1,6 @@
+# Konfiguracja TSP
+input_file = data.txt
+output_file = results.txt
+iterations = 1
+display_results = true
+show_progress = true
