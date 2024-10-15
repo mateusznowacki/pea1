@@ -1,0 +1,7 @@
+input_file=data.txt
+output_file=results.csv
+display_results=true
+show_progress=true
+iterations=1
+name=test
+
